@@ -222,10 +222,11 @@ jobs:
           done
 
       - name: Publish DMG package
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v1.1.0
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
+          overwrite: true
           files: |
             rustdesk*-${{ matrix.job.arch }}*.dmg
 
