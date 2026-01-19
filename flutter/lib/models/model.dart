@@ -1072,28 +1072,8 @@ class FfiModel with ChangeNotifier {
 
   void showConnectedWaitingForImage(OverlayDialogManager dialogManager,
       SessionID sessionId, String type, String title, String text) {
-    onClose() {
-      closeConnection();
-    }
-
-    if (waitForFirstImage.isFalse) return;
-    dialogManager.show(
-      (setState, close, context) => CustomAlertDialog(
-          title: null,
-          content: SelectionArea(child: msgboxContent(type, title, text)),
-          actions: [
-            dialogButton("Cancel", onPressed: onClose, isOutline: true)
-          ],
-          onCancel: onClose),
-      tag: '$sessionId-waiting-for-image',
-    );
-    waitForImageDialogShow.value = true;
-    waitForImageTimer = Timer(Duration(milliseconds: 1500), () {
-      if (waitForFirstImage.isTrue && !isRefreshing) {
-        bind.sessionInputOsPassword(sessionId: sessionId, value: '');
-      }
-    });
-    bind.sessionOnWaitingForImageDialogShow(sessionId: sessionId);
+    // Skip showing the connected dialog, keep it silent
+    return;
   }
 
   void showPrivacyFailedDialog(
